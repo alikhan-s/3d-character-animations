@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+using TMPro;
 
 public class AnimationManager : MonoBehaviour
 {
@@ -8,6 +10,10 @@ public class AnimationManager : MonoBehaviour
     [Tooltip("Directional Light")]
     public Light sceneLight;
 
+    public TextMeshProUGUI winText;
+
+    public ParticleSystem explosionParticles;
+
     private float initialLightIntensity;
 
     void Start()
@@ -15,6 +21,11 @@ public class AnimationManager : MonoBehaviour
         if (sceneLight != null)
         {
             initialLightIntensity = sceneLight.intensity;
+        }
+
+        if (winText != null)
+        {
+            winText.gameObject.SetActive(false);
         }
     }
 
@@ -25,6 +36,23 @@ public class AnimationManager : MonoBehaviour
         if (sceneLight != null)
         {
             sceneLight.intensity = initialLightIntensity;
+        }
+
+        StartCoroutine(ExplosionRoutine());
+    }
+
+    private IEnumerator ExplosionRoutine()
+    {
+        yield return new WaitForSeconds(2.33f);
+
+        if (winText != null)
+        {
+            winText.gameObject.SetActive(true);
+        }
+
+        if (explosionParticles != null)
+        {
+            explosionParticles.Play();
         }
     }
 
