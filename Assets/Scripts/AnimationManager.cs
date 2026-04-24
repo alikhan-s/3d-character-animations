@@ -60,6 +60,11 @@ public class AnimationManager : MonoBehaviour
     {
         characterAnimator.SetTrigger("Fail");
 
+        if (winText != null)
+        {
+            winText.gameObject.SetActive(false);
+        }
+
         if (sceneLight != null)
         {
             sceneLight.intensity = 0.2f;
