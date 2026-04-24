@@ -14,6 +14,8 @@ public class AnimationManager : MonoBehaviour
 
     public ParticleSystem explosionParticles;
 
+    public CameraShake cameraShake;
+
     private float initialLightIntensity;
 
     void Start()
@@ -53,6 +55,11 @@ public class AnimationManager : MonoBehaviour
         if (explosionParticles != null)
         {
             explosionParticles.Play();
+        }
+
+        if (cameraShake != null)
+        {
+            StartCoroutine(cameraShake.Shake(0.5f, 0.1f));
         }
     }
 
